@@ -1,11 +1,12 @@
-package com.example.demo.example1;
+package com.example.demo.jpademohtwoconect;
+
 
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -19,8 +20,17 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.example1.UserDaoService;
+import com.example.demo.example1.UserNotFoundException;
+import com.example.demo.example1.Userpojo;
+
+
+
+
+
+
 @RestController
-public class UserResourceController {
+public class UserJpaResouceController {
 	
 	
 
@@ -30,24 +40,28 @@ public class UserResourceController {
 	@Autowired
 	private UserDaoService service;
 	
+	@Autowired
+	private  UserRepository userrepository ;
 	
-	@GetMapping("getallusers")
+	@GetMapping("jpa/getallusers")
 	private List<Userpojo> getAllUser(){
-		return service.getAll();
+		
+		System.out.print("jbjkdvkj");
+		return userrepository.findAll();
 	
 	}
 	
 	
-	@GetMapping("getUserbyid/userid={userid}")
+	@GetMapping("jpa/getUserbyid/userid={userid}")
 	private Userpojo getuserbyid(@PathVariable Integer userid){
-		Userpojo user =service.getuserbyId(userid);
+		Userpojo user =userrepository.getOne(userid);
 		if(user==null) {
 			throw new UserNotFoundException("userd - "+ userid);
 		}
 		return user ;
 	}
 	
-	@PostMapping ("ctrateuser")
+	@PostMapping ("jpa/ctrateuser")
 	private ResponseEntity<Object> createuser(@Valid @RequestBody Userpojo userpozo) {
 	Userpojo user=	service.saveUser(userpozo);
 	URI location	=ServletUriComponentsBuilder.
@@ -61,7 +75,7 @@ return ResponseEntity.created(location).build()	;
 	}
 	
 	
-	@DeleteMapping("deleteuser/id={userid}")
+	@DeleteMapping("jpa/deleteuser/id={userid}")
 	private void deleteUser(@PathVariable Integer userid){
 		
 	Boolean status=	service.deleteUderById(userid);
@@ -78,7 +92,7 @@ return ResponseEntity.created(location).build()	;
 	
 	
 	
-	@GetMapping ("getjbhjjh")
+	@GetMapping ("jpa/getjbhjjh")
 	private String getInterlizationgoodmsg(@RequestHeader(name = "Accept-Language", required = false) Locale locale) {
 		
 		

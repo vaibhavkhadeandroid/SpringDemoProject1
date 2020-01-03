@@ -2,16 +2,29 @@ package com.example.demo.example1;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
-public class UserPozo {
+import io.swagger.annotations.ApiModel;
+
+
+@ApiModel("All details about user")
+@Entity
+public class Userpojo {
 	@Size(min = 2,message = "Min size must be grater than 2")
 	private String userName;
+	
+	@Id
+	@GeneratedValue
 	private Integer userId;
 	@Past
 	private Date dob;
-	public UserPozo(int userId, String userName, Date date) {
+	public Userpojo() {}
+	
+	public Userpojo(int userId, String userName, Date date) {
 		this.userName=userName;
 		this.userId=userId;
 		this.dob=date;
@@ -36,6 +49,8 @@ public class UserPozo {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
+	
+	//jdbc:h2:~/test
 	
 
 }

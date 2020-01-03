@@ -13,9 +13,11 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-@SpringBootApplication
-@ComponentScan(basePackages = "com.example.*")
+//@SpringBootApplication
 
+@SpringBootApplication(scanBasePackages={
+"com.example.*"})
+//@ComponentScan(basePackages = "com.example.*")
 public class Demo11Application {
 
 	

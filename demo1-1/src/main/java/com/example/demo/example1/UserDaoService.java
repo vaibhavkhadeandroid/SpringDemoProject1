@@ -12,24 +12,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDaoService {
 	
-	private static List <UserPozo> users=new ArrayList<UserPozo>();
+	private static List <Userpojo> users=new ArrayList<Userpojo>();
 	
 	private static int usercount =3;
 	static {
 		
-		users.add(new UserPozo(1 , "vaibhav", new Date()));
-		users.add(new UserPozo(2 , "vishavas", new Date()));
+		users.add(new Userpojo(1 , "vaibhav", new Date()));
+		users.add(new Userpojo(2 , "vishavas", new Date()));
 
-		users.add(new UserPozo(3 , "ganediwal", new Date()));
+		users.add(new Userpojo(3 , "ganediwal", new Date()));
 
 	}
 	
-	public List <UserPozo> getAll (){
+	public List <Userpojo> getAll (){
 		return users;
 		
 	}
 	
-	public UserPozo saveUser(UserPozo user) {
+	public Userpojo saveUser(Userpojo user) {
 		System.out.print("fristtine"+user.getUserId());
 		if(user.getUserId() ==  null) {
 			user.setUserId(++usercount);
@@ -40,9 +40,9 @@ public class UserDaoService {
 		return user;
 	} 
 	
-	public  UserPozo getuserbyId(Integer userId) {
+	public  Userpojo getuserbyId(Integer userId) {
 		
-		for(UserPozo user :users)
+		for(Userpojo user :users)
 		{
 			if(user.getUserId()==userId) {
 				return user;
@@ -53,10 +53,10 @@ public class UserDaoService {
 	
 	
 	public  Boolean deleteUderById(Integer id) {
-	Iterator<UserPozo>	user=users.iterator();
+	Iterator<Userpojo>	user=users.iterator();
 	
 	while (user.hasNext()) {
-		UserPozo userPozo = (UserPozo) user.next();
+		Userpojo userPozo = (Userpojo) user.next();
 		
 		if(userPozo.getUserId()==id) {
 			user.remove();
